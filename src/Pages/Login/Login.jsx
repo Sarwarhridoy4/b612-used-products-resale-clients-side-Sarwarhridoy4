@@ -1,12 +1,58 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Context/AuthContext";
+import { GoogleAuthProvider } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  // const onSubmit = data => console.log(data);
+  const { signIn, googleSignIn } = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
+  const [loginError, setloginError] = useState('')
+  const locaton = useLocation()
+  const navigate = useNavigate()
+  const from = locaton.state?.from?.pathname || '/';
+
+  const handelLogIn = (data) => {
+    console.log(data);
+    setloginError('');
+    signIn(data.email, data.password)
+      .then(result => {
+        const user = result.user
+        toast.success('User login Successfully!')
+        console.log(user); 
+        navigate(from,{replace:true})
+      })
+      .catch(error => {
+        console.error(error)
+        setloginError(error.message)
+      })
+  }
+
+
+  //google signin
+  const handelGoogleSignIn = () => {
+    googleSignIn(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast(`authenticated as ${user?.displayName}`)
+        navigate("/");
+       
+      })
+      .catch((error) => {
+        console.error(error.message);
+        toast(error.message)
+      });
+  };
+
   return (
     <section className='bg-white dark:bg-gray-900'>
       <div className='container flex items-center justify-center min-h-screen px-6 mx-auto'>
-        <form className='w-full max-w-md'>
-          <h1 className='text-3xl font-semibold text-gray-800 capitalize dark:text-white'>
+        <form onSubmit={handleSubmit(handelLogIn)} className='w-full max-w-md'>
+          <h1 className='text-3xl text-center font-semibold text-gray-800 capitalize dark:text-white'>
             sign In
           </h1>
 
@@ -30,9 +76,12 @@ const Login = () => {
 
             <input
               type='email'
+              {...register("email",{ required: "Provide Email" })}
               className='block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40'
               placeholder='Email address'
+              aria-invalid={errors.email ? "true" : "false"}
             />
+            {errors.email && <p className="text-red-500 block" role="alert">{errors.email?.message}</p>}
           </div>
 
           <div className='relative flex items-center mt-4'>
@@ -55,9 +104,16 @@ const Login = () => {
 
             <input
               type='password'
+              {...register("password", {
+                required: "Password is required",
+                minLength: { value: 6, message: "at least 6 carecter" },
+                
+              })}
               className='block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40'
               placeholder='Password'
+              aria-invalid={errors.password ? "true" : "false"}
             />
+            {errors.password && <p className="text-red-500 block" role="alert">{errors.password?.message}</p>}
           </div>
 
           <div className='mt-6'>
@@ -69,8 +125,7 @@ const Login = () => {
               or sign in with
             </p>
 
-            <a
-              href='/'
+            <span
               className='flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600'
             >
               <svg className='w-6 h-6 mx-2' viewBox='0 0 40 40'>
@@ -92,9 +147,13 @@ const Login = () => {
                 />
               </svg>
 
-              <span className='mx-2'>Sign in with Google</span>
-            </a>
-
+              <span onClick={handelGoogleSignIn} className='mx-2'>Sign in with Google</span>
+            </span>
+            <div>
+            {
+              loginError && toast.error(loginError)
+            }
+          </div>
             <div className='mt-6 text-center '>
               <Link to='/signup'
                 className='text-sm text-blue-500 hover:underline dark:text-blue-400'
