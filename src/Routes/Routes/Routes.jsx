@@ -6,6 +6,7 @@ import SignUp from "../../Pages/SignUp/Signup";
 import Error from "../../Pages/Error/Error";
 import Blogs from "../../Pages/Blogs/Blogs";
 import CategoryDetailse from "../../CategoryDetailse/CategoryDetailse";
+import Private from "../Private/Private";
 
 const router = createBrowserRouter([
     {
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
                     // console.log(params);
                     return fetch(`http://localhost:5000/products/${params.id}`)
                 },
-                element: <CategoryDetailse></CategoryDetailse>
+                element: <Private><CategoryDetailse></CategoryDetailse></Private>
             },
             
         ]
