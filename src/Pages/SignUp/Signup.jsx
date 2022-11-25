@@ -18,17 +18,16 @@ const Signup = () => {
     .then((result) => {
       const user = result.user;
       console.log(user);
-      toast.success("User created Successfully!");
       const userInfo = {
-        displayName: data.name,
-        userRole: data.Role,
+        displayName: data.name
+        
       };
       updateUser(userInfo)
         .then(() => {
           navigate('/')
         })
         .catch((error) => console.log(error));
-      toast("User created successful!");
+        toast.success("User created Successfully!");
     })
     .catch((error) => {
       console.error(error.message);
