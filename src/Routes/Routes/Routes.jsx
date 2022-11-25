@@ -5,6 +5,7 @@ import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/Signup";
 import Error from "../../Pages/Error/Error";
 import Blogs from "../../Pages/Blogs/Blogs";
+import CategoryDetailse from "../../CategoryDetailse/CategoryDetailse";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
             {
                 path: '/blogs',
                 element: <Blogs></Blogs>
+            },
+            {
+                path: '/category/:id',
+                loader: async ({ params }) => {
+                    // console.log(params);
+                    return fetch(`http://localhost:5000/products/${params.id}`)
+                },
+                element: <CategoryDetailse></CategoryDetailse>
             },
             
         ]
