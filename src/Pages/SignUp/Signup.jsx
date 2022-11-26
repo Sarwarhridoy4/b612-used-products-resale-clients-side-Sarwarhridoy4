@@ -10,6 +10,7 @@ const Signup = () => {
   const {register,handleSubmit,formState: { errors }} = useForm();
   const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
   const [signUpError, setSignUPError] = useState('');
+  const [createdUserEmail, setCreatedUserEmail] = useState('')
   const navigate = useNavigate()
   const googleProvider = new GoogleAuthProvider();
   // const onSubmit = (data) => console.log(data);
@@ -21,10 +22,11 @@ const Signup = () => {
                 console.log(user);
                 toast.success('User Created Successfully.')
                 const userInfo = {
-                    displayName: data.name
+                    displayName: data.username
                 }
                 updateUser(userInfo)
                   .then(() => {
+                    saveUser(data.username, data.email,data.Role);
                     navigate('/')
                         console.log('inside update user');
                     })
@@ -37,11 +39,28 @@ const Signup = () => {
             });
   };
 
+
+  const saveUser = (name, email,role) =>{
+    const user ={name, email,role};
+    fetch('http://localhost:5000/users', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    .then(data =>{
+        setCreatedUserEmail(email);
+    })
+}
+
   //google signin
   const handelGoogleSignIn = () => {
     googleSignIn(googleProvider)
       .then((result) => {
         const user = result.user;
+        saveUser(user?.displayName,user?.email)
         console.log(user);
         toast(`authenticated as ${user?.displayName}`);
         navigate("/");
