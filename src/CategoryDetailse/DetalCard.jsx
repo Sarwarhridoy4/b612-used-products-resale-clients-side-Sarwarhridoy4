@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const DetalCard = ({ data }) => {
     console.log(data);
     return (
@@ -15,8 +16,9 @@ const DetalCard = ({ data }) => {
                     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Resell Price: {data?.resalePrice}</p>
                     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Used For: {data?.usedYear} Year</p>
                     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Location: {data?.location}</p>
-                    <button className="btn btn-sm btn-outline btn-success block px-5 mx-auto">Book Now</button>
-        </div>
+                    <label htmlFor="booking-modal" className="btn btn-sm btn-outline btn-success block px-5 mx-auto">Book Now</label>
+                </div>
+                
     </div>
 </div>
     );

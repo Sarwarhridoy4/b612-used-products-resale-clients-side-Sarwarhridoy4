@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import BookingModal from "../Components/BookingModal/BookingModal";
 import DetalCard from "./DetalCard";
 
 const CategoryDetailse = () => {
@@ -10,6 +11,7 @@ const CategoryDetailse = () => {
       {categorydata.map((data, i) => (
         <DetalCard key={i} data={data}></DetalCard>
       ))}
+      <BookingModal></BookingModal>
     </div>
   );
 };

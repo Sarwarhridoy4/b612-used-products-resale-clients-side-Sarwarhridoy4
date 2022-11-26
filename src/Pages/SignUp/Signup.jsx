@@ -5,12 +5,12 @@ import { AuthContext } from "../../Context/AuthContext";
 import logo from "../../assets/Logo/logo.png";
 import toast from "react-hot-toast";
 import { GoogleAuthProvider } from "firebase/auth";
+import SaveUser from "../../Hooks/SaveUser";
 
 const Signup = () => {
   const {register,handleSubmit,formState: { errors }} = useForm();
   const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
   const [signUpError, setSignUPError] = useState('');
-  const [createdUserEmail, setCreatedUserEmail] = useState('')
   const navigate = useNavigate()
   const googleProvider = new GoogleAuthProvider();
   // const onSubmit = (data) => console.log(data);
@@ -51,7 +51,7 @@ const Signup = () => {
     })
     .then(res => res.json())
     .then(data =>{
-        setCreatedUserEmail(email);
+        
     })
 }
 
@@ -60,7 +60,7 @@ const Signup = () => {
     googleSignIn(googleProvider)
       .then((result) => {
         const user = result.user;
-        saveUser(user?.displayName,user?.email)
+        SaveUser(user?.displayName,user?.email)
         console.log(user);
         toast(`authenticated as ${user?.displayName}`);
         navigate("/");

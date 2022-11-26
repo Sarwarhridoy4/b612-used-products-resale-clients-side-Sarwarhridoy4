@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 const CategoryCard = ({ category }) => {
   const { name, image, category_id } = category;
   return (
@@ -19,6 +20,7 @@ const CategoryCard = ({ category }) => {
           <Link to={`/category/${category_id}`}><button className='btn btn-sm btn-success'>Expolre</button></Link>
         </span>
       </div>
+      
     </div>
   );
 };
