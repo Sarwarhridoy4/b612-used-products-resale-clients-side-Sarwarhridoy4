@@ -9,25 +9,28 @@ const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
   const handelLogout = () => {
-
     logOut()
       .then(() => {
-        toast.success('User Logged Out')
-       })
-    .catch(error=>console.log(error))
-  }
+        toast.success("User Logged Out");
+      })
+      .catch((error) => console.log(error));
+  };
   const menuItems = (
     <React.Fragment>
       <li>
         <Link to='/'>Home</Link>
       </li>
       <li>
-        {
-          user?<button onClick={handelLogout} className="btn btn-success">LogOut</button>:<Link to='/Login'>LogIn</Link>
-        }
+        {user ? (
+          <button onClick={handelLogout} className='btn btn-success'>
+            LogOut
+          </button>
+        ) : (
+          <Link to='/Login'>LogIn</Link>
+        )}
       </li>
       <li>
-        <Link to ='/dashboard'>DashBoard</Link>
+        <Link to='/dashboard'>DashBoard</Link>
       </li>
       <li>
         <Link to='/blogs'>Blogs</Link>

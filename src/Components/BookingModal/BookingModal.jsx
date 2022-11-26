@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 
 const BookingModal = () => {
+  const { productdata } = useContext(AuthContext)
+  console.log(productdata);
   return (
     <>
       {/* Put this part before </body> tag */}
