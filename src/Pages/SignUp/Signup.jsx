@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthContext";
@@ -9,30 +9,32 @@ import { GoogleAuthProvider } from "firebase/auth";
 const Signup = () => {
   const {register,handleSubmit,formState: { errors }} = useForm();
   const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
+  const [signUpError, setSignUPError] = useState('');
   const navigate = useNavigate()
   const googleProvider = new GoogleAuthProvider();
   // const onSubmit = (data) => console.log(data);
   const handelSignUp = (data) => {
-    console.log(data);
-    createUser(data.email, data.password)
-    .then((result) => {
-      const user = result.user;
-      console.log(user);
-      const userInfo = {
-        displayName: data.name
-        
-      };
-      updateUser(userInfo)
-        .then(() => {
-          navigate('/')
-        })
-        .catch((error) => console.log(error));
-        toast.success("User created Successfully!");
-    })
-    .catch((error) => {
-      console.error(error.message);
-      toast.error(error.message);
-    });
+    setSignUPError('');
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success('User Created Successfully.')
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                  .then(() => {
+                    navigate('/')
+                        console.log('inside update user');
+                    })
+                    .catch(err => console.log(err));
+            })
+          
+            .catch(error => {
+                console.log(error)
+                setSignUPError(error.message)
+            });
   };
 
   //google signin
@@ -196,6 +198,7 @@ const Signup = () => {
               >
                 Already have an account?
               </Link>
+              {signUpError && toast.error(signUpError)}
             </div>
           </div>
         </form>

@@ -27,6 +27,9 @@ const Navbar = () => {
         }
       </li>
       <li>
+        <Link to ='/dashboard'>DashBoard</Link>
+      </li>
+      <li>
         <Link to='/blogs'>Blogs</Link>
       </li>
     </React.Fragment>

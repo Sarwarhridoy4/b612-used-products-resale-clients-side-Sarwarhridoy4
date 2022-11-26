@@ -7,6 +7,7 @@ import Error from "../../Pages/Error/Error";
 import Blogs from "../../Pages/Blogs/Blogs";
 import CategoryDetailse from "../../CategoryDetailse/CategoryDetailse";
 import Private from "../Private/Private";
+import Dashboard from "../../Layout/Dashboard/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,11 @@ const router = createBrowserRouter([
             },
             
         ]
+    },
+    {
+        path: '/dashboard',
+        element: <Private><Dashboard></Dashboard></Private>,
+        errorElement: <Error></Error>,
     }
 ])
 
