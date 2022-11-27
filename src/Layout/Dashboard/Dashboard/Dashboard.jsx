@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../../../Shared/Navbar/Navbar";
 
 const Dashboard = () => {
   return (
-    <div className='drawer'>
+    <div>
+      <Navbar></Navbar>
+      <div className='drawer'>
       <input id='my-drawer' type='checkbox' className='drawer-toggle' />
       <div className='drawer-content'>
         {/* <!-- Page content here --> */}
@@ -16,13 +19,20 @@ const Dashboard = () => {
         <ul className='menu p-4 w-80 bg-base-100 text-base-content'>
           {/* <!-- Sidebar content here --> */}
           <li>
-            <Link>Sidebar Item 1</Link>
+            <Link>My Order</Link>
           </li>
           <li>
-            <Link>Sidebar Item 2</Link>
+            <Link>Add A Product</Link>
+          </li>
+          <li>
+            <Link>All Buyer</Link>
+          </li>
+          <li>
+            <Link>All Seller</Link>
           </li>
         </ul>
       </div>
+    </div>
     </div>
   );
 };
