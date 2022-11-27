@@ -28,7 +28,7 @@ const Signup = () => {
                   .then(() => {
                     saveUser(data.username, data.email,data.Role);
                     navigate('/')
-                        console.log('inside update user');
+                        toast('inside update user');
                     })
                     .catch(err => console.log(err));
             })
