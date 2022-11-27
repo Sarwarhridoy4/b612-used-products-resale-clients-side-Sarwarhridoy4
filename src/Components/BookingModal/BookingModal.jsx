@@ -29,7 +29,7 @@ const BookingModal = () => {
     // console.log(bookingdata);
     event.target.reset();
     //posting to server
-    fetch('http://localhost:5000/bookings', {
+    fetch('https://mobile-resell-bd-server.vercel.app/bookings', {
         method: 'POST',
         headers: {
             'content-type': 'application/json'

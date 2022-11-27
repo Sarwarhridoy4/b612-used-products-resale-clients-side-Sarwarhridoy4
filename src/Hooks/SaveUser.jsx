@@ -1,8 +1,6 @@
-
-
 const SaveUser = (name, email) => {
-  const user = { name, email, role:'Buyer' };
-  fetch("http://localhost:5000/users", {
+  const user = { name, email, role: "Buyer" };
+  fetch("https://mobile-resell-bd-server.vercel.app/users", {
     method: "POST",
     headers: {
       "content-type": "application/json",

@@ -8,59 +8,60 @@ import { GoogleAuthProvider } from "firebase/auth";
 import SaveUser from "../../Hooks/SaveUser";
 
 const Signup = () => {
-  const {register,handleSubmit,formState: { errors }} = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
-  const [signUpError, setSignUPError] = useState('');
-  const navigate = useNavigate()
+  const [signUpError, setSignUPError] = useState("");
+  const navigate = useNavigate();
   const googleProvider = new GoogleAuthProvider();
   // const onSubmit = (data) => console.log(data);
   const handelSignUp = (data) => {
-    setSignUPError('');
-        createUser(data.email, data.password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-                toast.success('User Created Successfully.')
-                const userInfo = {
-                    displayName: data.username
-                }
-                updateUser(userInfo)
-                  .then(() => {
-                    saveUser(data.username, data.email,data.Role);
-                    navigate('/')
-                        toast('inside update user');
-                    })
-                    .catch(err => console.log(err));
-            })
-          
-            .catch(error => {
-                console.log(error)
-                setSignUPError(error.message)
-            });
+    setSignUPError("");
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("User Created Successfully.");
+        const userInfo = {
+          displayName: data.username,
+        };
+        updateUser(userInfo)
+          .then(() => {
+            saveUser(data.username, data.email, data.Role);
+            navigate("/");
+            toast("inside update user");
+          })
+          .catch((err) => console.log(err));
+      })
+
+      .catch((error) => {
+        console.log(error);
+        setSignUPError(error.message);
+      });
   };
 
-
-  const saveUser = (name, email,role) =>{
-    const user ={name, email,role};
-    fetch('http://localhost:5000/users', {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(user)
+  const saveUser = (name, email, role) => {
+    const user = { name, email, role };
+    fetch("https://mobile-resell-bd-server.vercel.app/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
     })
-    .then(res => res.json())
-    .then(data =>{
-        
-    })
-}
+      .then((res) => res.json())
+      .then((data) => {});
+  };
 
   //google signin
   const handelGoogleSignIn = () => {
     googleSignIn(googleProvider)
       .then((result) => {
         const user = result.user;
-        SaveUser(user?.displayName,user?.email)
+        SaveUser(user?.displayName, user?.email);
         console.log(user);
         toast(`authenticated as ${user?.displayName}`);
         navigate("/");
@@ -70,7 +71,6 @@ const Signup = () => {
         toast(error.message);
       });
   };
-
 
   return (
     <section className='bg-white dark:bg-gray-900'>
@@ -206,7 +206,10 @@ const Signup = () => {
               Sign Up
             </button>
 
-            <button onClick={handelGoogleSignIn} className='w-full px-6 py-3 my-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50'>
+            <button
+              onClick={handelGoogleSignIn}
+              className='w-full px-6 py-3 my-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50'
+            >
               Google
             </button>
 
