@@ -31,20 +31,20 @@ const Dashboard = () => {
             {isAdmin && (
               <>
                 <li>
-                  <Link to='/dashboard/all'>All Buyer</Link>
+                  <Link to='/dashboard/allbuyer'>All Buyer</Link>
                 </li>
                 <li>
-                  <Link to='/dashboard/managedoctors'>All Seller</Link>
+                  <Link to='/dashboard/allseller'>All Seller</Link>
                 </li>
               </>
             )}
             {isSeller && (
               <>
                 <li>
-              <Link to='/dashboard/allusers'>Add A Product</Link>
+              <Link to='/dashboard/add-a-product'>Add A Product</Link>
             </li>
             <li>
-              <Link to='/dashboard/adddoctor'>My Products</Link>
+              <Link to='/dashboard/my-product'>My Products</Link>
             </li>
               </>
             )}

@@ -8,6 +8,11 @@ import Blogs from "../../Pages/Blogs/Blogs";
 import CategoryDetailse from "../../CategoryDetailse/CategoryDetailse";
 import Private from "../Private/Private";
 import Dashboard from "../../Layout/Dashboard/Dashboard/Dashboard";
+import MyOrder from "../../Layout/Dashboard/MyOrder/MyOrder";
+import AllBuyer from "../../Layout/Dashboard/AllBuyer/AllBuyer";
+import AllSeller from "../../Layout/Dashboard/AllSeller/AllSeller";
+import AddProduct from "../../Layout/Dashboard/AddProduct/AddProduct";
+import MyProduct from "../../Layout/Dashboard/MyProduct/MyProduct";
 
 const router = createBrowserRouter([
   {
@@ -53,7 +58,28 @@ const router = createBrowserRouter([
       </Private>
     ),
     errorElement: <Error></Error>,
-    children: [],
+    children: [
+      {
+        path: "/dashboard",
+        element: <MyOrder></MyOrder>
+      },
+      {
+        path: "/dashboard/allbuyer",
+        element: <AllBuyer></AllBuyer>
+      },
+      {
+        path: "/dashboard/allseller",
+        element: <AllSeller></AllSeller>
+      },
+      {
+        path: "/dashboard/add-a-product",
+        element: <AddProduct></AddProduct>
+      },
+      {
+        path: "/dashboard/my-product",
+        element: <MyProduct></MyProduct>
+      },
+    ],
   },
 ]);
 
