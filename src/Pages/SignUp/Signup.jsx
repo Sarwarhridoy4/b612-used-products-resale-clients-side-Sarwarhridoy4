@@ -31,7 +31,7 @@ const Signup = () => {
         updateUser(userInfo)
           .then(() => {
             saveUser(data.username, data.email, data.Role);
-            navigate("/");
+
             toast("inside update user");
           })
           .catch((err) => console.log(err));
@@ -45,7 +45,7 @@ const Signup = () => {
 
   const saveUser = (name, email, role) => {
     const user = { name, email, role };
-    fetch("https://mobile-resell-bd-server.vercel.app/users", {
+    fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -53,7 +53,10 @@ const Signup = () => {
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
-      .then((data) => {});
+      .then((data) => {
+        console.log(data);
+        navigate("/");
+      });
   };
 
   //google signin

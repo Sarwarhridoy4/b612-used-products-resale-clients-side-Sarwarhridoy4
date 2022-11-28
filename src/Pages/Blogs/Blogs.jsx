@@ -5,12 +5,10 @@ import Blog from "./Blog";
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
-    axios
-      .get("https://mobile-resell-bd-server.vercel.app/blogs")
-      .then((data) => {
-        const blogsdata = data.data;
-        setBlogs(blogsdata);
-      });
+    axios.get("http://localhost:5000/blogs").then((data) => {
+      const blogsdata = data.data;
+      setBlogs(blogsdata);
+    });
   }, []);
 
   return (

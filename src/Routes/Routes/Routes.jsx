@@ -35,9 +35,7 @@ const router = createBrowserRouter([
         path: "/category/:id",
         loader: async ({ params }) => {
           // console.log(params);
-          return fetch(
-            `https://mobile-resell-bd-server.vercel.app/products/${params.id}`
-          );
+          return fetch(`http://localhost:5000/products/${params.id}`);
         },
         element: (
           <Private>
@@ -55,6 +53,7 @@ const router = createBrowserRouter([
       </Private>
     ),
     errorElement: <Error></Error>,
+    children: [],
   },
 ]);
 

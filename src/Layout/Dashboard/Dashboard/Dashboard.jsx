@@ -1,38 +1,56 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, Outlet } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthContext";
 import Navbar from "../../../Shared/Navbar/Navbar";
+import useAdmin from "../../../Hooks/useAdmin/useAdmin";
+import useSeller from "../../../Hooks/useSeller/useSeller";
 
 const Dashboard = () => {
+  const { user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
+  const [isSeller] = useSeller(user?.email);
   return (
     <div>
       <Navbar></Navbar>
-      <div className='drawer'>
-      <input id='my-drawer' type='checkbox' className='drawer-toggle' />
-      <div className='drawer-content'>
-        {/* <!-- Page content here --> */}
-        <label htmlFor='my-drawer' className='btn btn-primary drawer-button'>
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-        </label>
+      <div className='drawer drawer-mobile'>
+        <input
+          id='dashboard-drawer'
+          type='checkbox'
+          className='drawer-toggle'
+        />
+        <div className='drawer-content'>
+          <Outlet></Outlet>
+        </div>
+        <div className='drawer-side'>
+          <label htmlFor='dashboard-drawer' className='drawer-overlay'></label>
+          <ul className='menu p-4 w-80 text-base-content'>
+            <li>
+              <Link to='/dashboard'>My Orders</Link>
+            </li>
+            
+            {isAdmin && (
+              <>
+                <li>
+                  <Link to='/dashboard/all'>All Buyer</Link>
+                </li>
+                <li>
+                  <Link to='/dashboard/managedoctors'>All Seller</Link>
+                </li>
+              </>
+            )}
+            {isSeller && (
+              <>
+                <li>
+              <Link to='/dashboard/allusers'>Add A Product</Link>
+            </li>
+            <li>
+              <Link to='/dashboard/adddoctor'>My Products</Link>
+            </li>
+              </>
+            )}
+          </ul>
+        </div>
       </div>
-      <div className='drawer-side'>
-        <label htmlFor='my-drawer' className='drawer-overlay'></label>
-        <ul className='menu p-4 w-80 bg-base-100 text-base-content'>
-          {/* <!-- Sidebar content here --> */}
-          <li>
-            <Link>My Order</Link>
-          </li>
-          <li>
-            <Link>Add A Product</Link>
-          </li>
-          <li>
-            <Link>All Buyer</Link>
-          </li>
-          <li>
-            <Link>All Seller</Link>
-          </li>
-        </ul>
-      </div>
-    </div>
     </div>
   );
 };
