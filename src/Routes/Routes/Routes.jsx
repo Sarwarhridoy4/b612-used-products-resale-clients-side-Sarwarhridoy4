@@ -40,7 +40,9 @@ const router = createBrowserRouter([
         path: "/category/:id",
         loader: async ({ params }) => {
           // console.log(params);
-          return fetch(`http://localhost:5000/products/${params.id}`);
+          return fetch(
+            `https://mobile-resell-bd-server-sarwarhridoy4.vercel.app/products/${params.id}`
+          );
         },
         element: (
           <Private>
@@ -61,23 +63,29 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <MyOrder></MyOrder>
+        loader: async ({ params }) => {
+          console.log(params.email);
+          return fetch(
+            `https://mobile-resell-bd-server-sarwarhridoy4.vercel.app/bookings/${params.email}`
+          );
+        },
+        element: <MyOrder></MyOrder>,
       },
       {
         path: "/dashboard/allbuyer",
-        element: <AllBuyer></AllBuyer>
+        element: <AllBuyer></AllBuyer>,
       },
       {
         path: "/dashboard/allseller",
-        element: <AllSeller></AllSeller>
+        element: <AllSeller></AllSeller>,
       },
       {
         path: "/dashboard/add-a-product",
-        element: <AddProduct></AddProduct>
+        element: <AddProduct></AddProduct>,
       },
       {
         path: "/dashboard/my-product",
-        element: <MyProduct></MyProduct>
+        element: <MyProduct></MyProduct>,
       },
     ],
   },

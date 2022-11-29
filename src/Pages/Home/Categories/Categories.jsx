@@ -5,10 +5,14 @@ import CategoryCard from "../../../CategoryCard/CategoryCard";
 const Categories = () => {
   const [catrgories, setCategories] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/phonecategory").then((data) => {
-      const categoriesdata = data.data;
-      setCategories(categoriesdata);
-    });
+    axios
+      .get(
+        "https://mobile-resell-bd-server-sarwarhridoy4.vercel.app/phonecategory"
+      )
+      .then((data) => {
+        const categoriesdata = data.data;
+        setCategories(categoriesdata);
+      });
   }, []);
   return (
     <section className='bg-white dark:bg-gray-900'>
