@@ -17,10 +17,10 @@ const Navbar = () => {
   };
   const menuItems = (
     <React.Fragment>
-      <li>
+      <li className="text-lg font-semibold">
         <Link to='/'>Home</Link>
       </li>
-      <li>
+      <li className="text-lg font-semibold">
         {user ? (
           <button onClick={handelLogout} className='btn btn-success'>
             LogOut
@@ -29,17 +29,17 @@ const Navbar = () => {
           <Link to='/Login'>LogIn</Link>
         )}
       </li>
-      <li>
+      <li className="text-lg font-semibold">
         <Link to='/dashboard'>DashBoard</Link>
       </li>
-      <li>
+      <li className="text-lg font-semibold">
         <Link to='/blogs'>Blogs</Link>
       </li>
     </React.Fragment>
   );
 
   return (
-    <div className='navbar bg-green-300'>
+    <div className='navbar bg-green-500 text-white'>
       <div className='navbar-start'>
         <div className='dropdown'>
           <label tabIndex={0} className='btn btn-ghost lg:hidden'>
