@@ -74,11 +74,15 @@ const Navbar = () => {
         <ul className='menu menu-horizontal p-0'>{menuItems}</ul>
       </div>
       <div className='navbar-end'>
-        <div className='avatar online'>
+        {
+          user ?
+          <div className='avatar online'>
           <div className='w-12 rounded-full'>
-            <img src='https://placeimg.com/192/192/people' alt='' />
+            <img src={user?.photoURL} alt='' />
           </div>
         </div>
+          : null
+        }
       </div>
     </div>
   );
