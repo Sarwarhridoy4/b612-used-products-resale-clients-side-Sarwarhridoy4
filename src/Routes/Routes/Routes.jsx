@@ -13,6 +13,7 @@ import AllBuyer from "../../Layout/Dashboard/AllBuyer/AllBuyer";
 import AllSeller from "../../Layout/Dashboard/AllSeller/AllSeller";
 import AddProduct from "../../Layout/Dashboard/AddProduct/AddProduct";
 import MyProduct from "../../Layout/Dashboard/MyProduct/MyProduct";
+import ComingSoon from "../../Pages/ComingSoon/ComingSoon";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs></Blogs>,
+      },
+      {
+        path: "/coming-soon",
+        element: <ComingSoon></ComingSoon>
       },
       {
         path: "/category/:id",
