@@ -17,10 +17,10 @@ const Navbar = () => {
   };
   const menuItems = (
     <React.Fragment>
-      <li className="text-lg font-semibold">
+      <li className='text-lg font-semibold'>
         <Link to='/'>Home</Link>
       </li>
-      <li className="text-lg font-semibold">
+      <li className='text-lg font-semibold'>
         {user ? (
           <button onClick={handelLogout} className='btn btn-success'>
             LogOut
@@ -29,10 +29,10 @@ const Navbar = () => {
           <Link to='/Login'>LogIn</Link>
         )}
       </li>
-      <li className="text-lg font-semibold">
+      <li className='text-lg font-semibold'>
         <Link to='/dashboard'>DashBoard</Link>
       </li>
-      <li className="text-lg font-semibold">
+      <li className='text-lg font-semibold'>
         <Link to='/blogs'>Blogs</Link>
       </li>
     </React.Fragment>
@@ -74,15 +74,13 @@ const Navbar = () => {
         <ul className='menu menu-horizontal p-0'>{menuItems}</ul>
       </div>
       <div className='navbar-end'>
-        {
-          user ?
+        {user ? (
           <div className='avatar online'>
-          <div className='w-12 rounded-full'>
-            <img src={user?.photoURL} alt='' />
+            <div className='w-12 rounded-full'>
+              <img src={user?.photoURL} alt='' />
+            </div>
           </div>
-        </div>
-          : null
-        }
+        ) : null}
       </div>
     </div>
   );

@@ -1,78 +1,79 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="cupcake">
+<html lang="en" data-theme="bumblebee">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#FFFFFF" />
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
+
     <title>Used Mobile Deal - Make mony of your Used Phone</title>
   </head>
-  <body className="dark">
+  <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root">
+    <div id="root"></div>
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
 
-    </div>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
     <script>
       // timer
       function timer(expiry) {
-          return {
-              expiry: expiry,
-              remaining:null,
-              init() {
-              this.setRemaining()
-              setInterval(() => {
-                  this.setRemaining();
-              }, 1000);
-              },
-              setRemaining() {
-              const diff = this.expiry - new Date().getTime();
-              this.remaining =  parseInt(diff / 1000);
-              },
-              days() {
-              return {
-                  value:this.remaining / 86400,
-                  remaining:this.remaining % 86400
-              };
-              },
-              hours() {
-              return {
-                  value:this.days().remaining / 3600,
-                  remaining:this.days().remaining % 3600
-              };
-              },
-              minutes() {
-                  return {
-                  value:this.hours().remaining / 60,
-                  remaining:this.hours().remaining % 60
-              };
-              },
-              seconds() {
-                  return {
-                  value:this.minutes().remaining,
-              };
-              },
-              format(value) {
-              return ("0" + parseInt(value)).slice(-2)
-              },
-              time(){
-                  return {
-                  days:this.format(this.days().value),
-                  hours:this.format(this.hours().value),
-                  minutes:this.format(this.minutes().value),
-                  seconds:this.format(this.seconds().value),
-              }
-              },
-          }
+        return {
+          expiry: expiry,
+          remaining: null,
+          init() {
+            this.setRemaining();
+            setInterval(() => {
+              this.setRemaining();
+            }, 1000);
+          },
+          setRemaining() {
+            const diff = this.expiry - new Date().getTime();
+            this.remaining = parseInt(diff / 1000);
+          },
+          days() {
+            return {
+              value: this.remaining / 86400,
+              remaining: this.remaining % 86400,
+            };
+          },
+          hours() {
+            return {
+              value: this.days().remaining / 3600,
+              remaining: this.days().remaining % 3600,
+            };
+          },
+          minutes() {
+            return {
+              value: this.hours().remaining / 60,
+              remaining: this.hours().remaining % 60,
+            };
+          },
+          seconds() {
+            return {
+              value: this.minutes().remaining,
+            };
+          },
+          format(value) {
+            return ("0" + parseInt(value)).slice(-2);
+          },
+          time() {
+            return {
+              days: this.format(this.days().value),
+              hours: this.format(this.hours().value),
+              minutes: this.format(this.minutes().value),
+              seconds: this.format(this.seconds().value),
+            };
+          },
+        };
       }
-  </script>
+    </script>
   </body>
 </html>
