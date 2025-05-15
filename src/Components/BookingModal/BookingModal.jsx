@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from "react-router";
+import AuthContext from "../../Context/Auth";
 
 const BookingModal = () => {
   const { productdata, user } = useContext(AuthContext);
@@ -36,6 +36,7 @@ const BookingModal = () => {
       body: JSON.stringify(bookingdata),
     })
       .then((res) => res.json())
+      // eslint-disable-next-line no-unused-vars
       .then((data) => {
         navigate("/");
         toast.success("Successfully Booked!");

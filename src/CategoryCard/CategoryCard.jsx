@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { Link } from "react-router";
 
 const CategoryCard = ({ category }) => {
   const { name, image, category_id } = category;
@@ -17,10 +16,11 @@ const CategoryCard = ({ category }) => {
           {name}
         </h3>
         <span className='mt-1 font-medium text-gray-600 dark:text-gray-300'>
-          <Link to={`/category/${category_id}`}><button className='btn btn-sm btn-success'>Expolre</button></Link>
+          <Link to={`/category/${category_id}`}>
+            <button className='btn btn-sm btn-success'>Expolre</button>
+          </Link>
         </span>
       </div>
-      
     </div>
   );
 };

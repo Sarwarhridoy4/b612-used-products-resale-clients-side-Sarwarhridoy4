@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../Context/AuthContext";
+import { useContext } from "react";
+import AuthContext from "../Context/Auth";
+
 
 const DetalCard = ({ data }) => {
   const { setProductdata } = useContext(AuthContext);

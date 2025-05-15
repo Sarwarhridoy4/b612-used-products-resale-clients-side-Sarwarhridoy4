@@ -1,36 +1,40 @@
-import React, { useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../Context/AuthContext";
+
 import { GoogleAuthProvider } from "firebase/auth";
 import toast from "react-hot-toast";
+import AuthContext from "../../Context/Auth";
 
 const Login = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   // const onSubmit = data => console.log(data);
   const { signIn, googleSignIn } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
-  const [loginError, setloginError] = useState('')
-  const locaton = useLocation()
-  const navigate = useNavigate()
-  const from = locaton.state?.from?.pathname || '/';
+  const [loginError, setloginError] = useState("");
+  const locaton = useLocation();
+  const navigate = useNavigate();
+  const from = locaton.state?.from?.pathname || "/";
 
   const handelLogIn = (data) => {
     console.log(data);
-    setloginError('');
+    setloginError("");
     signIn(data.email, data.password)
-      .then(result => {
-        const user = result.user
-        toast.success('User login Successfully!')
-        console.log(user); 
-        navigate(from,{replace:true})
+      .then((result) => {
+        const user = result.user;
+        toast.success("User login Successfully!");
+        console.log(user);
+        navigate(from, { replace: true });
       })
-      .catch(error => {
-        console.error(error)
-        setloginError(error.message)
-      })
-  }
-
+      .catch((error) => {
+        console.error(error);
+        setloginError(error.message);
+      });
+  };
 
   //google signin
   const handelGoogleSignIn = () => {
@@ -38,13 +42,12 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        toast(`authenticated as ${user?.displayName}`)
+        toast(`authenticated as ${user?.displayName}`);
         navigate("/");
-       
       })
       .catch((error) => {
         console.error(error.message);
-        toast(error.message)
+        toast(error.message);
       });
   };
 
@@ -76,12 +79,16 @@ const Login = () => {
 
             <input
               type='email'
-              {...register("email",{ required: "Provide Email" })}
+              {...register("email", { required: "Provide Email" })}
               className='block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40'
               placeholder='Email address'
               aria-invalid={errors.email ? "true" : "false"}
             />
-            {errors.email && <p className="text-red-500 block" role="alert">{errors.email?.message}</p>}
+            {errors.email && (
+              <p className='text-red-500 block' role='alert'>
+                {errors.email?.message}
+              </p>
+            )}
           </div>
 
           <div className='relative flex items-center mt-4'>
@@ -107,13 +114,16 @@ const Login = () => {
               {...register("password", {
                 required: "Password is required",
                 minLength: { value: 6, message: "at least 6 carecter" },
-                
               })}
               className='block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40'
               placeholder='Password'
               aria-invalid={errors.password ? "true" : "false"}
             />
-            {errors.password && <p className="text-red-500 block" role="alert">{errors.password?.message}</p>}
+            {errors.password && (
+              <p className='text-red-500 block' role='alert'>
+                {errors.password?.message}
+              </p>
+            )}
           </div>
 
           <div className='mt-6'>
@@ -125,9 +135,7 @@ const Login = () => {
               or sign in with
             </p>
 
-            <span
-              className='flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600'
-            >
+            <span className='flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600'>
               <svg className='w-6 h-6 mx-2' viewBox='0 0 40 40'>
                 <path
                   d='M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z'
@@ -147,15 +155,14 @@ const Login = () => {
                 />
               </svg>
 
-              <span onClick={handelGoogleSignIn} className='mx-2'>Sign in with Google</span>
+              <span onClick={handelGoogleSignIn} className='mx-2'>
+                Sign in with Google
+              </span>
             </span>
-            <div>
-            {
-              loginError && toast.error(loginError)
-            }
-          </div>
+            <div>{loginError && toast.error(loginError)}</div>
             <div className='mt-6 text-center '>
-              <Link to='/signup'
+              <Link
+                to='/signup'
                 className='text-sm text-blue-500 hover:underline dark:text-blue-400'
               >
                 Don’t have an account yet? Sign up

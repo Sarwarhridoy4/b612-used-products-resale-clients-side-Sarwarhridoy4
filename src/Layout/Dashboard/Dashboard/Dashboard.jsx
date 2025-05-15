@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
-import { Link, Outlet } from "react-router-dom";
-import { AuthContext } from "../../../Context/AuthContext";
+import { useContext } from "react";
+import { Link, Outlet } from "react-router";
+
 import Navbar from "../../../Shared/Navbar/Navbar";
 import useAdmin from "../../../Hooks/useAdmin/useAdmin";
 import useSeller from "../../../Hooks/useSeller/useSeller";
+import AuthContext from "../../../Context/Auth";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -27,7 +28,7 @@ const Dashboard = () => {
             <li>
               <Link to='/dashboard'>My Orders</Link>
             </li>
-            
+
             {isAdmin && (
               <>
                 <li>
@@ -41,11 +42,11 @@ const Dashboard = () => {
             {isSeller && (
               <>
                 <li>
-              <Link to='/dashboard/add-a-product'>Add A Product</Link>
-            </li>
-            <li>
-              <Link to='/dashboard/my-product'>My Products</Link>
-            </li>
+                  <Link to='/dashboard/add-a-product'>Add A Product</Link>
+                </li>
+                <li>
+                  <Link to='/dashboard/my-product'>My Products</Link>
+                </li>
               </>
             )}
           </ul>

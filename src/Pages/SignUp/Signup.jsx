@@ -1,11 +1,12 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../Context/AuthContext";
+
 import logo from "../../assets/Logo/logo.png";
 import toast from "react-hot-toast";
 import { GoogleAuthProvider } from "firebase/auth";
 import SaveUser from "../../Hooks/SaveUser";
+import AuthContext from "../../Context/Auth";
 
 const Signup = () => {
   const {

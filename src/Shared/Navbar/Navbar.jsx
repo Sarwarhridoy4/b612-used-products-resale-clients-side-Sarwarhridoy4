@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import logo from "../../assets/Logo/logo.png";
-import { AuthContext } from "../../Context/AuthContext";
+import AuthContext from "../../Context/Auth";
 
 const Navbar = () => {
   //menu-items goes here//
   const { user, logOut } = useContext(AuthContext);
+  // console.log(user)
 
   const handelLogout = () => {
     logOut()
